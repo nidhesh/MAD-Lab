@@ -1,0 +1,77 @@
+MainActivity.java
+
+package com.example.nidhesh.madlabpractice;
+
+import android.os.Bundle;
+import android.app.Activity;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+public class MainActivity extends Activity {
+
+    String[] mobileArray = {"Android","IPhone","WindowsMobile","Blackberry",
+            "WebOS","Ubuntu","Windows7","Max OS X"};
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        ArrayAdapter adapter = new ArrayAdapter<>(this,
+                R.layout.activity_main2, mobileArray);
+
+        ListView listView =  findViewById(R.id.mobile_list);
+        listView.setAdapter(adapter);
+    }
+}
+
+Main2Activity.java
+
+package com.example.nidhesh.madlabpractice;
+
+import android.os.Bundle;
+import android.app.Activity;
+
+public class Main2Activity extends Activity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main2);
+    }
+
+}
+
+activity_main.xml
+
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.nidhesh.madlabpractice.MainActivity">
+
+    <ListView
+        android:id="@+id/mobile_list"
+        android:layout_width="368dp"
+        android:layout_height="503dp"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="8dp" />
+</android.support.constraint.ConstraintLayout>
+
+
+activity_main2.xml
+
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:padding="10dip"
+    android:textSize="16sp"
+    android:textStyle="bold"
+    tools:context="com.example.nidhesh.madlabpractice.Main2Activity">
+
+</TextView> 
