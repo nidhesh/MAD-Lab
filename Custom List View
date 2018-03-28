@@ -1,0 +1,134 @@
+activity_main.xml
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.nidhesh.madlabpractice.MainActivity">
+
+    <ListView
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>
+
+
+activity_main2.xml
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.nidhesh.madlabpractice.Main2Activity">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="TextView" />
+</LinearLayout>
+
+
+
+
+MainActivity.java 
+
+import android.app.Activity;
+import android.os.Bundle;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.widget.ListView;
+import java.util.ArrayList;
+
+public class MainActivity extends Activity {
+    ListView list;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        ArrayList<dataSet> arrayOfDS = new ArrayList<dataSet>();
+
+        dataSet temp = new dataSet( "donut",R.drawable.a11);
+        dataSet temp2 = new dataSet( "eclair",R.drawable.a22);
+        dataSet temp3 = new dataSet( "froyo",R.drawable.a33);
+        dataSet temp4 = new dataSet( "gingerbread",R.drawable.a22);
+
+        arrayOfDS.add(temp);
+        arrayOfDS.add(temp2);
+        arrayOfDS.add(temp3);
+        arrayOfDS.add(temp4);
+
+        Main2Activity adapter = new Main2Activity(this, arrayOfDS);
+
+        list = findViewById(R.id.list);
+        list.setAdapter(adapter);
+
+    }
+}
+
+Main2Activity.java
+
+import android.app.Activity;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.content.res.Resources;
+
+import java.util.ArrayList;
+
+public class Main2Activity extends ArrayAdapter<dataSet> {
+
+    private final Activity context;
+
+
+    public Main2Activity(Activity con, ArrayList<dataSet> ds)
+    {
+        super(con, R.layout.activity_main2, ds);
+        context =con;
+    }
+
+    public View getView(int position,View view,ViewGroup parent)
+    {
+        LayoutInflater inflater = context.getLayoutInflater();
+        View rowView = inflater.inflate(R.layout.activity_main2, null,true);
+
+        dataSet ds = getItem(position);
+
+        TextView txtTitle = rowView.findViewById(R.id.textView);
+        ImageView imageView = rowView.findViewById(R.id.imageView);
+
+        txtTitle.setText(ds.name);
+        imageView.setImageResource(ds.img);
+
+        return rowView;
+    }
+
+
+}
+
+dataSet.java
+
+public class dataSet {
+    public String name;
+    public Integer img;
+
+    public dataSet(String name, Integer img) {
+        this.name = name;
+        this.img = img;
+    }
+}
